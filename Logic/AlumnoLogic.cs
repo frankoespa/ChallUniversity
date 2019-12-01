@@ -50,10 +50,6 @@ namespace Logic
                 return null;
             }
         }
-        private bool AlumnosExists(int id)
-        {
-            return _context.Alumnos.Any(e => e.Id == id);
-        }
 
     }
 }

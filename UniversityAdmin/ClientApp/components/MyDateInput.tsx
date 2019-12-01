@@ -27,13 +27,14 @@ function MyDateTimeInput(props: IProps): JSX.Element {
 	return (
 		<MuiPickersUtilsProvider utils={MomentUtils} locale='es'>
 			<KeyboardDatePicker
+				placeholder='d/m/aaaa'
 				className={classes.fecha}
 				autoOk={false}
 				invalidDateMessage='Formato inválido'
 				inputVariant='outlined'
 				disableToolbar
 				variant='dialog'
-				format='D/M/YYYY'
+				format='DD/MM/YYYY'
 				margin='normal'
 				id='date-picker-inline'
 				label={title}

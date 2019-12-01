@@ -16,7 +16,6 @@ import Typography from '@material-ui/core/Typography';
 import { Theme, createStyles, WithStyles, withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Link from 'next/link';
-import Router from 'next/router';
 
 const drawerWidth = 240;
 
@@ -57,7 +56,6 @@ interface Props extends WithStyles<typeof styles> {}
 
 interface IState {
 	mobileOpen: boolean;
-	title: string;
 }
 
 class Layout extends Component<Props, IState> {
@@ -65,22 +63,8 @@ class Layout extends Component<Props, IState> {
 		super(props);
 		this.handleDrawerToggle = this.handleDrawerToggle.bind(this);
 		this.state = {
-			mobileOpen: false,
-			title: ''
+			mobileOpen: false
 		};
-	}
-
-	componentDidMount() {
-		this.setState({ title: Router.pathname });
-		Router.events.on('routeChangeComplete', (url) => {
-			console.log(url);
-			var ruta: string = url;
-			if (ruta == '/') {
-				this.setState({ title: 'Alumnos' });
-			} else {
-				this.setState({ title: ruta.slice(1, ruta.length - 1) });
-			}
-		});
 	}
 
 	handleDrawerToggle() {
@@ -96,13 +80,13 @@ class Layout extends Component<Props, IState> {
 				<div className={classes.toolbar} />
 				<Divider />
 				<List>
-					<Link href='/index'>
+					<Link href='/index' prefetch>
 						<ListItem button>
 							<ListItemIcon>{<CustomerIcon />}</ListItemIcon>
 							<ListItemText primary='Alumnos' />
 						</ListItem>
 					</Link>
-					<Link href='/asignaturas'>
+					<Link href='/asignaturas' prefetch>
 						<ListItem button>
 							<ListItemIcon>{<InscIcon />}</ListItemIcon>
 							<ListItemText primary='Asignaturas' />
@@ -125,7 +109,7 @@ class Layout extends Component<Props, IState> {
 							<MenuIcon />
 						</IconButton>
 						<Typography variant='h6' noWrap>
-							{this.state.title}
+							Universidad
 						</Typography>
 					</Toolbar>
 				</AppBar>

@@ -3,7 +3,6 @@ import { Theme, createStyles, WithStyles, withStyles } from '@material-ui/core/s
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogActions from '@material-ui/core/DialogActions';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -84,6 +83,14 @@ function DialogAddAlumno(props: IProps): JSX.Element {
 		setFechaNacimiento(date);
 	}
 
+	function cleanCampos() {
+		setNombre('');
+		setApellido('');
+		setLegajo(null);
+		setEdad(null);
+		setFechaNacimiento(null);
+	}
+
 	function saveAlumno() {
 		if (nombre.length != 0 && apellido.length != 0 && legajo != null && edad != null && fechaNacimiento != null) {
 			fetch('/api/alumnos', {
@@ -98,11 +105,7 @@ function DialogAddAlumno(props: IProps): JSX.Element {
 					'Content-Type': 'application/json'
 				}
 			}).then((algo) => {
-				nombre = '';
-				apellido = '';
-				legajo = null;
-				edad = null;
-				fechaNacimiento = null;
+				cleanCampos();
 				handleAddAlumnoDialog();
 				getAlumnos();
 			});
@@ -166,7 +169,14 @@ function DialogAddAlumno(props: IProps): JSX.Element {
 				<MyDateInput title='Fecha Nacimiento' value={fechaNacimiento} valueOnChange={fechaNacimientoChange}></MyDateInput>
 			</DialogContent>
 			<DialogActions>
-				<Button variant='outlined' color='primary' onClick={() => handleAddAlumnoDialog()} className={classes.buttonCancel}>
+				<Button
+					variant='outlined'
+					color='primary'
+					onClick={() => {
+						cleanCampos();
+						handleAddAlumnoDialog();
+					}}
+					className={classes.buttonCancel}>
 					Cancelar
 				</Button>
 				<Button variant='outlined' color='primary' onClick={saveAlumno}>

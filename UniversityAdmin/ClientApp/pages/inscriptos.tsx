@@ -32,7 +32,7 @@ interface IProps extends WithStyles<typeof styles> {}
 function inscriptos(props: IProps): JSX.Element {
 	const { classes } = props;
 	let router = useRouter();
-	let { id, asignatura } = router.query;
+	let { id, asignatura, docente } = router.query;
 	let [alumnosInscriptos, setalumnosInscriptos] = React.useState<IAlumno[]>([]);
 
 	function getAlumnosInscriptos() {
@@ -59,7 +59,7 @@ function inscriptos(props: IProps): JSX.Element {
 
 	return (
 		<React.Fragment>
-			<PanelExpanded title={`Alumnos inscriptos a: ${asignatura}`}>
+			<PanelExpanded title={`Alumnos inscriptos a: ${asignatura} (Docente: ${docente})`}>
 				<TableAlumnos items={alumnosInscriptos} isEstado={true} />
 			</PanelExpanded>
 		</React.Fragment>

@@ -42,7 +42,7 @@ function TableCursos(props: IProps): JSX.Element {
 	}
 
 	function verCurso(curso: ICurso) {
-		Router.push({ pathname: '/inscriptos', query: { id: curso.id, asignatura: curso.asignatura } });
+		Router.push({ pathname: '/inscriptos', query: { id: curso.id, asignatura: curso.asignatura, docente: curso.docente } });
 	}
 
 	return (
